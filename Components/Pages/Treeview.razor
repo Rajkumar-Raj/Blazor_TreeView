@@ -1,0 +1,71 @@
+﻿@page "/treeview"
+@using Newtonsoft.Json.Linq
+
+<h3>Dynamic Tree View with Search and Selectable Nodes</h3>
+
+<!-- Filter Input -->
+<input @bind="FilterText" @oninput="ApplyFilter" placeholder="Search..." class="form-control mb-3" />
+
+<!-- Render the Tree -->
+@if (Nodes != null && Nodes.Any())
+{
+    <ul>
+        @foreach (var node in Nodes)
+        {
+            <TreeNodeComponent Node="node" OnSelect="OnSelectNode" />
+        }
+    </ul>
+}
+
+<p>Selected t_id: @SelectedId</p>
+
+@code {
+    private List<TreeNode> Nodes = new List<TreeNode>();
+    private string FilterText { get; set; } = string.Empty;
+    private int? SelectedId { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Load JSON (you can also fetch it from API)
+        var json = File.ReadAllText("wwwroot/example.json");
+
+        // Parse the JSON to TreeNode structure
+        var jToken = JToken.Parse(json);
+        Nodes = TreeParser.ParseJsonToTree(jToken);
+    }
+
+    private void ApplyFilter(ChangeEventArgs e)
+    {
+        FilterTree(Nodes, FilterText);
+    }
+
+    private void FilterTree(List<TreeNode> nodes, string filterText)
+    {
+        foreach (var node in nodes)
+        {
+            if (node.Children.Any())
+            {
+                FilterTree(node.Children, filterText);
+                node.IsVisible = node.Children.Any(child => child.IsVisible);
+            }
+            else
+            {
+                node.IsVisible = node.Key.Contains(filterText, StringComparison.OrdinalIgnoreCase);
+            }
+        }
+    }
+
+    private void OnSelectNode(int? id)
+    {
+        SelectedId = id;
+    }
+}
+
+
+<h3>Treeview</h3>
+
+@code {
+
+    
+
+}

@@ -1,0 +1,72 @@
+{
+  "np1": {
+    "level1_A": {
+      "level2_A": [
+        {
+          "t_name": "level2_A_n1",
+          "t_id": 1
+        },
+        {
+          "t_name": "level2_A_n2",
+          "t_id": 2
+        }
+      ],
+      "level2_B": [
+        {
+          "t_name": "level2_B_n1",
+          "t_id": 3
+        },
+        {
+          "t_name": "level2_B_n2",
+          "t_id": 4
+        }
+      ]
+    },
+    "level1_B": {
+      "level2_A": [
+        {
+          "t_name": "level2_A_n1",
+          "t_id": 1
+        },
+        {
+          "t_name": "level2_A_n2",
+          "t_id": 2
+        }
+      ],
+      "level2_B": [
+        {
+          "t_name": "level2_B_n1",
+          "t_id": 3
+        },
+        {
+          "t_name": "level2_B_n2",
+          "t_id": 4
+        }
+      ]
+    }
+  },
+  "npe1": {
+    "level1_A": {
+      "level2_A": [
+        {
+          "t_name": "level2_A_n1",
+          "t_id": 1
+        },
+        {
+          "t_name": "level2_A_n2",
+          "t_id": 2
+        }
+      ],
+      "level2_B": [
+        {
+          "t_name": "level2_B_n1",
+          "t_id": 3
+        },
+        {
+          "t_name": "level2_B_n2",
+          "t_id": 4
+        }
+      ]
+    }
+  }
+}

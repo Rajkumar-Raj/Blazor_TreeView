@@ -1,0 +1,43 @@
+﻿@code {
+    [Parameter]
+    public TreeNode Node { get; set; }
+
+    [Parameter]
+    public EventCallback<int?> OnSelect { get; set; }
+
+    private bool IsExpanded { get; set; } = false;
+}
+
+@if (Node.IsVisible)
+{
+    <li>
+        @if (Node.Children.Any())
+        {
+            <span @onclick="Toggle">@(IsExpanded ? "▼" : "►") @Node.Key</span>
+            @* <span>@(IsExpanded ? "▼" : "►")</span> *@
+
+            @if (IsExpanded)
+            {
+                <ul>
+                    @foreach (var child in Node.Children)
+                    {
+                        <TreeNodeComponent Node="child" OnSelect="OnSelect" />
+                    }
+                </ul>
+            }
+        }
+        else
+        {
+            <span @onclick="() => OnSelect.InvokeAsync(Node.Id)" style="cursor:pointer; color:blue;">
+                @Node.Key
+            </span>
+        }
+    </li>
+}
+
+@code {
+    private void Toggle()
+    {
+        IsExpanded = !IsExpanded;
+    }
+}
